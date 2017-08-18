@@ -1,0 +1,84 @@
+//
+//  Global.pch
+//  FSB
+//
+//  Created by 大家保 on 2017/7/31.
+//  Copyright © 2017年 dajiabao. All rights reserved.
+//
+
+#ifndef Global_pch
+#define Global_pch
+
+//扩展
+#import "GlobalImport.h"
+//字体
+#import "GlobalFont.h"
+//颜色
+#import "GlobalColor.h"
+//url
+#import "GlobalUrl.h"
+
+
+#define WeakSelf __weak typeof(self) weakSelf = self
+
+#define NotiCenter [NSNotificationCenter defaultCenter]
+
+#define UserDefaults  [NSUserDefaults standardUserDefaults]
+
+#define KeyWindow [UIApplication sharedApplication].delegate.window
+
+#define RootTabBarController (UITabBarController *)KeyWindow.rootViewController
+
+//颜色
+#define RGBA(r,g,b,a)         [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+
+#define RGB(r,g,b)            [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
+
+//版本
+#define VERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
+
+#define MYUUID [[NSUserDefaults standardUserDefaults] objectForKey:@"DEVICETOKEN"] != nil ? [[NSUserDefaults standardUserDefaults] objectForKey:@"DEVICETOKEN"] : [[UIDevice currentDevice].identifierForVendor UUIDString]
+
+// 自定义NSLog,在debug模式下打印，在release模式下取消一切NSLog
+#ifdef DEBUG
+#define NSLog(FORMAT, ...) fprintf(stderr,"%s\n\n**************************************%s:%d********************************\n\n",[[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String],[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],__LINE__);
+#else
+#define NSLog(FORMAT, ...) nil
+#endif
+
+//系统
+#define SYSTEM_VERSION        [[[UIDevice currentDevice] systemVersion] floatValue]
+
+#define ThanIOS8                [[UIDevice currentDevice].systemVersion doubleValue]>=8.0?YES:NO
+
+#define ThanIOS9              [[UIDevice currentDevice].systemVersion doubleValue]>=9.0?YES:NO
+
+#define ThanIOS10              [[UIDevice currentDevice].systemVersion doubleValue]>=10.0?YES:NO
+
+#define BoldSystemFont(Tsize)  ((ThanIOS9)?[UIFont fontWithName:@"PingFangSC-Semibold" size:Tsize]:[UIFont boldSystemFontOfSize:Tsize])
+
+#define SystemFont(Tsize)     ((ThanIOS9)?[UIFont fontWithName:@"PingFang SC" size:Tsize]:[UIFont systemFontOfSize:Tsize])
+
+// 屏幕高度
+#define SCREEN_HEIGHT         ([[UIScreen mainScreen] bounds].size.height)
+
+#define SCREEN_WIDTH          [[UIScreen mainScreen]bounds].size.width
+
+#define GetHeight(ll)          (SCREEN_HEIGHT==480?ll*667.0/667.0:ll*667.0/667.0)
+
+#define GetWidth(ll)           (ll*375.0/375.0)
+
+// 获取 View 的 frame 的属性
+#define GetViewWidth(view)    view.frame.size.width
+
+#define GetViewHeight(view)   view.frame.size.height
+
+#define GetViewX(view)        view.frame.origin.x
+
+#define GetViewY(view)        view.frame.origin.y
+
+#define GetViewMaxX(view)     (view.frame.origin.x+view.frame.size.width)
+
+#define GetViewMaxY(view)     (view.frame.origin.y+view.frame.size.height)
+
+#endif /* Global_pch */
